@@ -1,4 +1,4 @@
-name: PHP Composer
+name: Test On Concrete 5
 
 on:
   push:
@@ -22,8 +22,9 @@ jobs:
     - name: Install Chromedriver
       run: |
        sudo apt-get -y install google-chrome-stable
-       wget https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip
-       unzip chromedriver_linux64.zip
+       LATEST_CHROMEDRIVER_VERSION=`curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"`
+       wget -c -nc --retry-connrefused --tries=0 "https://chromedriver.storage.googleapis.com/${LATEST_CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+       unzip -o -q chromedriver_linux64.zip
        
     - name: Run Chromedriver
       run: ./chromedriver --port=4444 --url-base=wd/hub --whitelisted-ips=  > /dev/null 2>&1&
