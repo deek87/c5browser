@@ -1,0 +1,44 @@
+name: PHP Composer
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+    - name: Install Chromedriver
+      run: |
+       sudo apt-get -y install google-chrome-stable
+       wget https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip
+       unzip chromedriver_linux64.zip
+       
+    - name: Run Chromedriver
+      run: ./chromedriver --port=4444 --url-base=wd/hub --whitelisted-ips=  > /dev/null 2>&1&
+
+    - name: Setup Concrete5
+      run: docker run -d --name c5_docker -p 8080:80 -v ${GITHUB_WORKSPACE}/tests/assets/packages:/app/packages mlocati/docker5:latest-full "sudo -u www-data concrete/bin/concrete5 c5:reset -f && tail -f /dev/null"
+
+    - name: Build Test Helpers
+      run: ${GITHUB_WORKSPACE}/vendor/bin/codecept build
+    
+    - name: Run Install Test
+      run: ${GITHUB_WORKSPACE}/vendor/bin/codecept run Install
+    
+    - name: Run Dashboard Test
+      run: ${GITHUB_WORKSPACE}/vendor/bin/codecept run Dashboard
+    
+    - name: Run Page Test
+      run: ${GITHUB_WORKSPACE}/vendor/bin/codecept run Page
