@@ -43,3 +43,10 @@ jobs:
     
     - name: Run Page Test
       run: ${GITHUB_WORKSPACE}/vendor/bin/codecept run Page
+
+    - name: Upload html on fail
+        if: failure()
+        uses: actions/upload-artifact@v1
+          with:
+            name: html-failure
+            path: tests/_output/
