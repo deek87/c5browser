@@ -1,24 +1,25 @@
 {
     "name": "derekcameron/c5_browser",
     "description": "A concrete5 web browser module for codeception",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "type": "library",
     "require": {
-        "php": ">=5.5.9"
-    },
-    "require-dev": {
+        "php": ">=5.5.9",
         "codeception/codeception": "^3.1"
     },
     "autoload": {
         "psr-4": {
-            "Codeception\\Module\\"             : "src"
+            "Codeception\\Module\\" : "src"
         }
+    },
+    "autoload-dev": {
+        "C5Browser\\Test": "tests"
     },
     "license": "MIT",
     "authors": [
         {
             "name": "Derek Cameron",
-            "email": "derek@concrete5.co.jp"
+            "email": "info@derekcameron.com"
         }
     ],
     "minimum-stability": "dev"
