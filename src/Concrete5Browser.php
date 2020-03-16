@@ -169,11 +169,13 @@ class Concrete5Browser extends WebDriver {
         $this->_addLocator($install, 'install');
         $this->debug('I visit the concrete5 install page.');
         $this->amOnPage($this->getPathFromLocator('installRedirect'));
+        if ($this->_findElements($this->getPathFromLocator('installLocaleSelector'))) {
+            $this->debug('I select ' . $langCode . '_' . $localeCode . ' as the installation language.');
+            $this->selectOption($this->getPathFromLocator('installLocaleSelector'), strtolower($langCode) .
+                '_' . strtoupper($localeCode));
+            $this->clickWithLeftButton($this->getPathFromLocator('installLocaleButton'));
 
-        $this->debug('I select ' . $langCode . '_' . $localeCode . ' as the installation language.');
-        $this->selectOption($this->getPathFromLocator('installLocaleSelector'), strtolower($langCode) .
-            '_' . strtoupper($localeCode));
-        $this->clickWithLeftButton($this->getPathFromLocator('installLocaleButton'));
+        }
         $this->debug('I check the required items.');
         $this->waitForText("Required Items");
         $this->seeNumberOfElements($this->getPathFromLocator('requiredItems'),[16,18]);
