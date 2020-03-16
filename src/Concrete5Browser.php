@@ -168,7 +168,7 @@ class Concrete5Browser extends WebDriver {
         $install = 'Codeception\Module\Locators\Concrete5\Version'.$this->version.'\InstallLocators';
         $this->_addLocator($install, 'install');
         $this->debug('I visit the concrete5 install page.');
-        $this->amOnPage($this->getPathFromLocator('installPage'));
+        $this->amOnPage($this->getPathFromLocator('installRedirect'));
 
         $this->debug('I select ' . $langCode . '_' . $localeCode . ' as the installation language.');
         $this->selectOption($this->getPathFromLocator('installLocaleSelector'), strtolower($langCode) .
