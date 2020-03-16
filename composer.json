@@ -22,5 +22,5 @@
             "email": "info@derekcameron.com"
         }
     ],
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
