@@ -53,3 +53,10 @@ jobs:
       with:
         name: html-failure
         path: tests/_output/
+    - name: Failure Things
+      if: failure()
+      run: |
+        ls -la ${GITHUB_WORKSPACE}/tests/assets/packages
+        docker exec c5_docker ls -la
+        docker exec c5_docker ls -la packages
+        docker exec c5_docker ccm-service start
