@@ -33,7 +33,7 @@ jobs:
       run: ./chromedriver --port=4444 --url-base=wd/hub --whitelisted-ips=  > /dev/null 2>&1&
 
     - name: Setup Concrete5
-      run: docker run -d --name c5_docker -p 8080:80 -v ${GITHUB_WORKSPACE}/tests/assets/packages:/app/packages docker5-no-install:8.5.2
+      run: docker run -d --name c5_docker -p 8080:80 -v ${GITHUB_WORKSPACE}/tests/assets/packages/dk_test_package:/app/packages/dk_test_package docker5-no-install:8.5.2
 
     - name: Build Test Helpers
       run: ${GITHUB_WORKSPACE}/vendor/bin/codecept build
