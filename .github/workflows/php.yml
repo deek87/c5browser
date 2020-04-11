@@ -60,8 +60,6 @@ jobs:
       run: |
         until $(echo | nc localhost 8080); do sleep 1; echo waiting for C5 on port 8080...; done;
         echo "C5 Server started"
-        echo "Debug"
-        curl 'http://127.0.0.1:8080'
 
     - name: Build Test Helpers
       run: ${GITHUB_WORKSPACE}/vendor/bin/codecept build
