@@ -2,7 +2,7 @@
 modules:
   config:
     Concrete5Browser:
-      browser: chrome-headless
+      browser: chrome
       port: 4444
       capabilities:
         "goog:chromeOptions":

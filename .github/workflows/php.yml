@@ -26,6 +26,9 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
 
+    - name: Update Packages
+      run: sudo apt-get update
+
     - name: Install Geckodriver and Firefox
       if: matrix.browser == 'firefox'
       run: |
@@ -37,7 +40,6 @@ jobs:
     - name: Install Chromedriver and Chrome
       if: matrix.browser == 'chrome'
       run: |
-       sudo apt-get update
        sudo apt-get -y install google-chrome-stable
        LATEST_CHROMEDRIVER_VERSION=`curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"`
        wget -c -nc --retry-connrefused --tries=0 "https://chromedriver.storage.googleapis.com/${LATEST_CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
@@ -55,7 +57,11 @@ jobs:
       run: docker run -d --name c5_docker -p 8080:80 -v ${GITHUB_WORKSPACE}/tests/assets/packages/dk_test_package:/app/packages/dk_test_package docker5-no-install:8.5.2
 
     - name: Wait for Server
-      run: until $(echo | nc localhost 8080); do sleep 1; echo waiting for C5 on port 8080...; done; echo "C5 Server started"
+      run: |
+        until $(echo | nc localhost 8080); do sleep 1; echo waiting for C5 on port 8080...; done;
+        echo "C5 Server started"
+        echo "Debug"
+        curl 'http://127.0.0.1:8080'
 
     - name: Build Test Helpers
       run: ${GITHUB_WORKSPACE}/vendor/bin/codecept build
