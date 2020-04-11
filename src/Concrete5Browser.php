@@ -185,7 +185,7 @@ class Concrete5Browser extends WebDriver {
 
         }
         $this->debug('I check the required items.');
-        $this->waitForText("Required Items");
+        $this->waitForText("Required Items", 30);
         $this->seeNumberOfElements($this->getPathFromLocator('requiredItems'),[16,18]);
         $this->debug('I continue with installation.');
         $this->clickWithLeftButton($this->getPathFromLocator('continueInstallationButton'));
