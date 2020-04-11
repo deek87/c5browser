@@ -36,6 +36,7 @@ jobs:
         tar -xvzf geckodriver*
         chmod +x geckodriver
         sudo apt-get -y install firefox
+        touch tests/_output/geckodriver.log
 
     - name: Install Chromedriver and Chrome
       if: matrix.browser == 'chrome'
@@ -44,14 +45,15 @@ jobs:
        LATEST_CHROMEDRIVER_VERSION=`curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"`
        wget -c -nc --retry-connrefused --tries=0 "https://chromedriver.storage.googleapis.com/${LATEST_CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
        unzip -o -q chromedriver_linux64.zip
+       touch tests/_output/chromedriver.log
        
     - name: Run Chromedriver
       if: matrix.browser == 'chrome'
-      run: ./chromedriver --port=4444 --url-base=wd/hub --whitelisted-ips=  > tests/_output/chromedriver.log  2>&1&
+      run: ./chromedriver --port=4444 --url-base=wd/hub --whitelisted-ips=  >> tests/_output/chromedriver.log  2>&1&
 
     - name: Run Geckodriver
       if: matrix.browser == 'firefox'
-      run: ./geckodriver -p 4445  > tests/_output/geckodriver.log 2>&1&
+      run: ./geckodriver -p 4445  >> tests/_output/geckodriver.log 2>&1&
 
     - name: Setup Concrete5
       run: docker run -d --name c5_docker -p 8080:80 -v ${GITHUB_WORKSPACE}/tests/assets/packages/dk_test_package:/app/packages/dk_test_package docker5-no-install:8.5.2
