@@ -8,8 +8,9 @@ on:
 
 jobs:
   build:
-    matrix:
-      browser: [chrome, firefox]
+    strategy:
+      matrix:
+        browser: [chrome, firefox]
 
     runs-on: ubuntu-latest
 
