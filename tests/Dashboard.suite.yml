@@ -8,12 +8,12 @@ actor: AcceptanceTester
 modules:
     enabled:
          - Concrete5Browser:
-              url: 'http://localhost:8080'
+              url: 'http://127.0.0.1:8080'
               browser: chrome
               admin email: c5@example.com
               username: admin
               password: 12345
-              database host: localhost
+              database host: 127.0.0.1
               database password: 12345
               database name: c5
               database user: c5

@@ -49,11 +49,11 @@ jobs:
        
     - name: Run Chromedriver
       if: matrix.browser == 'chrome'
-      run: ./chromedriver --port=4444 --url-base=wd/hub --whitelisted-ips=  >> tests/_output/chromedriver.log  2>&1&
+      run: ./chromedriver --port=4444 --url-base=wd/hub --whitelisted-ips= &>> tests/_output/chromedriver.log &
 
     - name: Run Geckodriver
       if: matrix.browser == 'firefox'
-      run: ./geckodriver -p 4445  >> tests/_output/geckodriver.log 2>&1&
+      run: ./geckodriver -p 4445  &>> tests/_output/geckodriver.log &
 
     - name: Setup Concrete5
       run: docker run -d --name c5_docker -p 8080:80 -v ${GITHUB_WORKSPACE}/tests/assets/packages/dk_test_package:/app/packages/dk_test_package docker5-no-install:8.5.2
