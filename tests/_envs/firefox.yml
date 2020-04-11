@@ -5,10 +5,10 @@ modules:
       browser: firefox
       port: 4445
       path: ''
-      desiredCapabilities:
+      capabilities:
         "moz:firefoxOptions":
           args:
-            - "--headless"
-            - "--disable-gpu"
-            - window-size=1920x1080
+            - "-headless"
+            - "-disable-gpu"
+            - "window-size=1920x1080"
         window_size: false
