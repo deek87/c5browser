@@ -267,6 +267,17 @@ class Concrete5Browser extends WebDriver {
 
     }
 
+    public function logout($username = null)
+    {
+        if ($username === null)
+        {
+            $username = $this->config['username'];
+        }
+
+        $this->deleteSessionSnapshot($username);
+        $this->amOnPage('/');
+    }
+
     /**
      * @param null $username
      * @param null $password
