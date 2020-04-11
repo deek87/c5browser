@@ -9,5 +9,5 @@ modules:
           args:
             - "--headless"
             - "--disable-gpu"
-            - "window-size=1920x1080"
+            - window-size=1920x1080
         window_size: false
