@@ -7,8 +7,13 @@ use Codeception\Lib\ModuleContainer;
 use Codeception\Module\Locators\LocatorInterface;
 use Codeception\Exception\ModuleException;
 use Codeception\Module\Traits\BlockTrait;
+use Codeception\Module\Traits\FileManagerTrait;
 use Codeception\Module\Traits\HelperTrait;
 use Codeception\Module\Traits\PackageTrait;
+use Facebook\WebDriver\Interactions\Internal\WebDriverButtonReleaseAction;
+use Facebook\WebDriver\Interactions\Internal\WebDriverClickAndHoldAction;
+use Facebook\WebDriver\Interactions\Internal\WebDriverMouseMoveAction;
+use Facebook\WebDriver\Interactions\WebDriverActions;
 use PHPUnit\Exception;
 
 /**
@@ -21,6 +26,7 @@ class Concrete5Browser extends WebDriver {
     use BlockTrait;
     use HelperTrait;
     use PackageTrait;
+    use FileManagerTrait;
     /** @var LocatorInterface[] */
     protected $locators = [];
 
@@ -54,6 +60,8 @@ class Concrete5Browser extends WebDriver {
         parent::__construct($moduleContainer, $config);
         if (isset($this->config['c5_version']) && version_compare($this->config['c5_version'] , '5.7.5.13') < 1) {
             $this->version = 7;
+        } elseif (isset($this->config['c5_version']) && version_compare($this->config['c5_version'] , '9.0.0') >= 0) {
+            $this->version = 9;
         }
         // Instantiate the locator
         $this->initiateLocators();
@@ -182,6 +190,7 @@ class Concrete5Browser extends WebDriver {
         $this->debug('I continue with installation.');
         $this->clickWithLeftButton($this->getPathFromLocator('continueInstallationButton'));
         $this->debug('I fill in incorrect details for the site.');
+        $this->waitForElement($this->getPathFromLocator('siteName'));
         $this->fillField($this->getPathFromLocator('siteName'),'concrete5');
         $this->fillField($this->getPathFromLocator('emailField'),'test@concrete5-test.test');
         $this->fillField($this->getPathFromLocator('passwordField'),'RandomPassword1');
@@ -190,6 +199,7 @@ class Concrete5Browser extends WebDriver {
         $this->fillField($this->getPathFromLocator('databaseUserField'),'invalid_user');
         $this->fillField($this->getPathFromLocator('databasePasswordField'),'invalid_user');
         $this->fillField($this->getPathFromLocator('databaseNameField'),'concrete5_tests');
+        $this->scrollTo($this->getPathFromLocator('privacyCheckbox'));
         $this->debug('I check privacy checkbox');
         $this->checkOption($this->getPathFromLocator('privacyCheckbox'));
         $this->seeCheckboxIsChecked($this->getPathFromLocator('privacyCheckbox'));
@@ -198,8 +208,6 @@ class Concrete5Browser extends WebDriver {
         $this->clickWithLeftButton($this->getPathFromLocator('primaryButton'));
         $this->debug('I wait for error to be displayed.');
         $this->waitForElement($this->getPathFromLocator('systemAlertBox'),20);
-
-
         $this->debug('I fill in the correct details for the site.');
         $this->debug('I enter the site name');
         $this->fillField($this->getPathFromLocator('siteName'),isset($this->config['site'])? $this->config['site'] :'concrete5');
@@ -315,24 +323,6 @@ class Concrete5Browser extends WebDriver {
         $this->waitForJS('return !!window . jQuery && window . jQuery . active == 0;', 60);
     }
 
-    public function enterPageDetails($pageName, $location = null) {
-
-    }
-
-
-
-    public function runJob($jobName)
-    {
-
-    }
-
-    public function clickInstallAJob($packageHandle)
-    {
-        //
-
-    }
-
-
 
 
     public function scheduleAJob($jobName, $everyX = '5', $period = 'minutes')
@@ -355,6 +345,6 @@ class Concrete5Browser extends WebDriver {
 
     public function checkCronStatus()
     {
-        
+        //$this->clic
     }
 }

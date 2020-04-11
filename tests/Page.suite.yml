@@ -8,8 +8,8 @@ actor: AcceptanceTester
 modules:
     enabled:
       - Concrete5Browser:
-          url: 'http://localhost:8080'
-          browser: chrome-headless
+          url: 'http://127.0.0.1:8080'
+          browser: chrome
           admin email: c5@example.com
           username: admin
           password: 12345
@@ -20,18 +20,4 @@ modules:
           language: en
           locale: US
           port: 4444
-          capabilities:
-            chromeOptions:
-              args:
-                - "--headless"
-                - "--disable-gpu"
-                - window-size=1920x1080
-            window_size: false
       - \Helper\Acceptance
-env:
-  chrome:
-    modules:
-      config:
-        WebDriver:
-          host: 0.0.0.0
-          browser: chrome

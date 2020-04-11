@@ -8,6 +8,8 @@ on:
 
 jobs:
   build:
+    matrix:
+      browser: [chrome, firefox]
 
     runs-on: ubuntu-latest
 
@@ -22,7 +24,17 @@ jobs:
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
-    - name: Install Chromedriver
+
+    - name: Install Geckodriver and Firefox
+      if: matrix.browser == 'firefox'
+      run: |
+        wget -c -nc --retry-connrefused --tries=0 "https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz"
+        tar -xvzf geckodriver*
+        chmod +x geckodriver
+        sudo apt-get -y install firefox
+
+    - name: Install Chromedriver and Chrome
+      if: matrix.browser == 'chrome'
       run: |
        sudo apt-get -y install google-chrome-stable
        LATEST_CHROMEDRIVER_VERSION=`curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"`
@@ -30,7 +42,12 @@ jobs:
        unzip -o -q chromedriver_linux64.zip
        
     - name: Run Chromedriver
+      if: matrix.browser == 'chrome'
       run: ./chromedriver --port=4444 --url-base=wd/hub --whitelisted-ips=  > /dev/null 2>&1&
+
+    - name: Run Geckodriver
+      if: matrix.browser == 'firefox'
+      run: ./geckodriver -p 4445  > /dev/null 2>&1&
 
     - name: Setup Concrete5
       run: docker run -d --name c5_docker -p 8080:80 -v ${GITHUB_WORKSPACE}/tests/assets/packages/dk_test_package:/app/packages/dk_test_package docker5-no-install:8.5.2
@@ -39,13 +56,13 @@ jobs:
       run: ${GITHUB_WORKSPACE}/vendor/bin/codecept build
     
     - name: Run Install Test
-      run: ${GITHUB_WORKSPACE}/vendor/bin/codecept run Install
+      run: ${GITHUB_WORKSPACE}/vendor/bin/codecept run Install --env=${{ matrix.browser }}
     
     - name: Run Dashboard Test
-      run: ${GITHUB_WORKSPACE}/vendor/bin/codecept run Dashboard
+      run: ${GITHUB_WORKSPACE}/vendor/bin/codecept run Dashboard --env=${{ matrix.browser }}
     
     - name: Run Page Test
-      run: ${GITHUB_WORKSPACE}/vendor/bin/codecept run Page
+      run: ${GITHUB_WORKSPACE}/vendor/bin/codecept run Page --env=${{ matrix.browser }}
 
     - name: Upload html on fail
       if: failure()

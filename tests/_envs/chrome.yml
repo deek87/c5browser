@@ -1,0 +1,13 @@
+# `chrome` environment config goes here
+modules:
+  config:
+    Concrete5Browser:
+      browser: chrome
+      port: 4444
+      capabilities:
+        "goog:chromeOptions":
+          args:
+            - "--headless"
+            - "--disable-gpu"
+            - window-size=1920x1080
+        window_size: false

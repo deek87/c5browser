@@ -1,0 +1,14 @@
+# `firefox` environment config goes here
+modules:
+  config:
+    Concrete5Browser:
+      browser: firefox
+      port: 4445
+      path: ''
+      desiredCapabilities:
+        "moz:firefoxOptions":
+          args:
+            - "--headless"
+            - "--disable-gpu"
+            - window-size=1920x1080
+        window_size: false

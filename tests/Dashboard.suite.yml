@@ -20,18 +20,4 @@ modules:
               language: en
               locale: US
               port: 4444
-              capabilities:
-                    chromeOptions:
-                         args:
-                              - "--headless"
-                              - "--disable-gpu"
-                              - window-size=1920x1080
-                    window_size: false
          - \Helper\Acceptance
-env:
-  chrome:
-    modules:
-      config:
-        WebDriver:
-          host: 0.0.0.0
-          browser: chrome

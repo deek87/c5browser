@@ -43,13 +43,13 @@ class AddCest {
 
     public function addNewBlock(AcceptanceTester $I)
     {
-
-
-
+        $I->addContentBlock('XYZ TESTING');
     }
 
     public function dragAndDropBlock(AcceptanceTester $I) {
-        $I->clickWithLeftButton('.ccm-toolbar-add');
+       $I->dragAndDropImageBlock('bridge','Main');
+       /*
+        *  $I->clickWithLeftButton('.ccm-toolbar-add');
         $I->waitForText('Image');
         $I->dragAndDrop('//a[@data-panel-add-block-drag-item="block"][@title="Image"]',
             '//div[contains(@class,"ccm-area-drag-area")][text()="Empty Page Footer Area"]');
@@ -61,6 +61,7 @@ class AddCest {
         $I->waitForText('Add');
         $I->click('Add');
         $I->waitForText('The block has been added successfully.');
+        */
 
     }
 
@@ -85,10 +86,10 @@ objDiv.scrollTop = objDiv.scrollHeight;");
 
         $I->waitForText('Publish Page');
         $I->click('Publish Page');
-        $I->waitForText('XYZ TESTING EXTRA TEST');
+        $I->waitForText('XYZ TESTING');
         $I->logout();
         $I->amOnPage('/index.php/test-page');
-        $I->waitForText('XYZ TESTING EXTRA TEST');
+        $I->waitForText('XYZ TESTING');
 
     }
 }
