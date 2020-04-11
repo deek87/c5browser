@@ -49,7 +49,7 @@ jobs:
        
     - name: Run Chromedriver
       if: matrix.browser == 'chrome'
-      run: ./chromedriver --port=4444 --url-base=wd/hub --whitelisted-ips= &>> tests/_output/chromedriver.log &
+      run: ./chromedriver --port=4444 --url-base=wd/hub --verbose --whitelisted-ips= &>> tests/_output/chromedriver.log &
 
     - name: Run Geckodriver
       if: matrix.browser == 'firefox'
