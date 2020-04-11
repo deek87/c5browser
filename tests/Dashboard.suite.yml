@@ -8,7 +8,7 @@ actor: AcceptanceTester
 modules:
     enabled:
          - Concrete5Browser:
-              url: 'http://localhost:8080'
+              url: 'http://127.0.0.1:8080'
               browser: chrome-headless
               admin email: c5@example.com
               username: admin
