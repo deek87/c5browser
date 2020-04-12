@@ -8,10 +8,7 @@ on:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        browser: [chrome, firefox]
-
+    name: Build Docker and Composer
     runs-on: ubuntu-latest
 
     steps:
@@ -29,6 +26,25 @@ jobs:
     - name: Update Packages
       run: sudo apt-get update
 
+    - name: Setup Concrete5
+      run: docker run -d -p 8080:80 -v ${GITHUB_WORKSPACE}/tests/assets/packages/dk_test_package:/app/packages/dk_test_package docker5-no-install:8.5.2
+
+    - name: Wait for Server
+      run: |
+        until $(echo | nc localhost 8080); do sleep 1; echo waiting for C5 on port 8080...; done;
+        echo "C5 Server started"
+
+    - name: Build Test Helpers
+      run: ${GITHUB_WORKSPACE}/vendor/bin/codecept build
+
+  browser-test:
+    runs-on: ubuntu-latest
+    needs: [build]
+    name: Test on ${{ matrix.browser }}
+    strategy:
+      matrix:
+        browser: [chrome, firefox]
+    steps:
     - name: Install Geckodriver and Firefox
       if: matrix.browser == 'firefox'
       run: |
@@ -46,17 +62,6 @@ jobs:
       if: matrix.browser == 'firefox'
       run: ./geckodriver -p 4445  &>> tests/_output/geckodriver.log &
 
-    - name: Setup Concrete5
-      run: docker run -d -p 8080:80 -v ${GITHUB_WORKSPACE}/tests/assets/packages/dk_test_package:/app/packages/dk_test_package docker5-no-install:8.5.2
-
-    - name: Wait for Server
-      run: |
-        until $(echo | nc localhost 8080); do sleep 1; echo waiting for C5 on port 8080...; done;
-        echo "C5 Server started"
-
-    - name: Build Test Helpers
-      run: ${GITHUB_WORKSPACE}/vendor/bin/codecept build
-    
     - name: Run Install Test
       run: ${GITHUB_WORKSPACE}/vendor/bin/codecept run Install --env=${{ matrix.browser }}
     
