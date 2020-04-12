@@ -49,8 +49,8 @@ jobs:
         touch tests/_output/geckodriver.log
 
     - name: Install Latest Chromedriver and Chrome
-        if: matrix.browser == 'chrome'
-        run: sudo apt-get install -y chromium-chromedriver google-chrome-stable
+      if: matrix.browser == 'chrome'
+      run: sudo apt-get install -y chromium-chromedriver google-chrome-stable
 
     - name: Run Chromedriver
       if: matrix.browser == 'chrome'
