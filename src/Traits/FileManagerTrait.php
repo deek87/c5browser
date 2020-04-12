@@ -10,6 +10,7 @@ trait FileManagerTrait
     public function searchAndSelectFile($filename)
     {
         $this->searchForFile($filename);
+        $this->wait(2);
         $this->selectFromFileManager($filename);
     }
 
