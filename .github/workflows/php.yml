@@ -48,6 +48,10 @@ jobs:
         sudo apt-get -y install firefox
         touch tests/_output/geckodriver.log
 
+    - name: Install Latest Chromedriver and Chrome
+        if: matrix.browser == 'chrome'
+        run: sudo apt-get install -y chromium-chromedriver google-chrome-stable
+
     - name: Run Chromedriver
       if: matrix.browser == 'chrome'
       run: chromedriver --port=4444 --url-base=wd/hub --verbose --whitelisted-ips= &>> tests/_output/chromedriver.log &
