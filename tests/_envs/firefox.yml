@@ -10,5 +10,6 @@ modules:
           args:
             - "-headless"
             - "-disable-gpu"
-            - "window-size=1920x1080"
+            - "-width=1920"
+            - "-height=1080"
         window_size: false
