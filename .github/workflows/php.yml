@@ -45,6 +45,7 @@ jobs:
       matrix:
         browser: [chrome, firefox]
     steps:
+      uses: build
     - name: Install Geckodriver and Firefox
       if: matrix.browser == 'firefox'
       run: |
