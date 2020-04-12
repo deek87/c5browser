@@ -7,10 +7,12 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-    name: Build Docker and Composer
+  browser-test:
     runs-on: ubuntu-latest
-
+    name: Test on ${{ matrix.browser }}
+    strategy:
+      matrix:
+        browser: [chrome, firefox]
     steps:
     - uses: actions/checkout@v2
 
@@ -37,15 +39,6 @@ jobs:
     - name: Build Test Helpers
       run: ${GITHUB_WORKSPACE}/vendor/bin/codecept build
 
-  browser-test:
-    runs-on: ubuntu-latest
-    needs: [build]
-    name: Test on ${{ matrix.browser }}
-    strategy:
-      matrix:
-        browser: [chrome, firefox]
-    steps:
-    - uses: build
     - name: Install Geckodriver and Firefox
       if: matrix.browser == 'firefox'
       run: |
