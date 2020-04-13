@@ -30,9 +30,9 @@ class AddCest
     {
         $I->seeElement('//a[@data-launch-panel="sitemap"]');
         $I->clickWithLeftButton('//a[@data-launch-panel="sitemap"]');
-        $I->waitForText('New Page', '30');
+        $I->waitForText('New Page', 30);
         $I->click('Empty Page');
-        $I->waitForElement('.ccm-toolbar-page-edit-mode-active');
+        $I->waitForElement('.ccm-toolbar-page-edit-mode-active', 30);
         $I->waitForJS('return document.readyState == "complete"', 60);
         $I->waitForJS('return !!window . jQuery && window . jQuery . active == 0;', 60);
     }
