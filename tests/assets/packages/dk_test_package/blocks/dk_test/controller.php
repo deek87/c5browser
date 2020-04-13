@@ -1,4 +1,5 @@
 <?php
+
 namespace Concrete\Package\DkTestPackage\Block\DkTest;
 
 use Concrete\Core\Block\BlockController;
@@ -18,6 +19,5 @@ class Controller extends BlockController
     public function view()
     {
         echo 'hello world';
-
     }
 }

@@ -1,0 +1,19 @@
+<?php
+/*
+ * This document has been generated with
+ * https://mlocati.github.io/php-cs-fixer-configurator/#version:2.16.2|configurator
+ * you can change this configuration by importing this file.
+ */
+return PhpCsFixer\Config::create()
+    ->setRules([
+        '@Symfony' => true,
+        '@PSR2' => true,
+        '@PhpCsFixer' => true,
+        '@PSR1' => true,
+        'yoda_style' => false,
+    ])
+    ->setFinder(PhpCsFixer\Finder::create()
+        ->exclude('vendor')
+        ->in([__DIR__ . '/src', __DIR__ . '/tests'])
+    )
+;

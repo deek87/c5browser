@@ -6,12 +6,11 @@ use AcceptanceTester;
 
 class InstallCest
 {
-
     /**
-     * @param AcceptanceTester $I
      * @throws \Exception
      */
-    public function installCheck(AcceptanceTester $I) {
+    public function installCheck(AcceptanceTester $I)
+    {
         $I->installConcrete5();
         $I->comment('I click on edit your site button');
         $I->clickWithLeftButton($I->getPathFromLocator('primaryButton'));
@@ -19,5 +18,4 @@ class InstallCest
         $I->waitForElement($I->getPathFromLocator('uiDialogBox'), 30);
         $I->click($I->getPathFromLocator('uiDialogClose'));
     }
-
 }

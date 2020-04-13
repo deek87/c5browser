@@ -1,38 +1,12 @@
 <?php
 
-
 namespace Codeception\Module\Traits;
-
 
 trait BlockTrait
 {
-
-
     public function addBlockToPage($blockType, $area = 'Main')
     {
-        /**
-         * $I->debug("I'm Adding A Content Block To The Page");
-        $I->clickWithLeftButton('//div[contains(@class,"ccm-area-drag-area")][text()="Empty Main Area"]');
-        $I->waitForElementVisible('//div[@class="popover fade bottom"]//a[@data-menu-action="area-add-block"]');
-        $I->clickWithLeftButton('//div[@class="popover fade bottom"][contains(@style,"display: block;")]//a[@data-menu-action="area-add-block"]');
-        $I->waitForText('Blocks',20);
-        $I->waitForElement('//a[@data-block-type-handle="content"]');
-        $I->clickWithLeftButton('//a[@data-block-type-handle="content"]');
-        $I->waitForElement('div.cke_inner');
-        $I->type('XYZ TESTING');
-        $I->debug("I'm Adding Bold To The Next Entered Text");
-        $I->canSeeElement('div.cke_inner');
-        $I->clickWithLeftButton('//div[@class="cke_inner"]//span[@role="presentation"]//span[contains(@class,"cke_button__bold_icon")]');
-        $I->wait(0.5);
-        $I->clickWithLeftButton('//div[@contenteditable="true"][contains(@class,"cke_editable")]');
-        $I->wait(0.5);
-        $I->type(' EXTRA TEST');
-        $I->clickWithLeftButton('//div[@class="cke_inner"]//span[@role="presentation"]//span[contains(@class,"cke_button__bold_icon")]');
-        $I->wait(0.5);
-        $I->clickWithLeftButton('//div[@class="cke_inner"]//span[@class="cke_button_label cke_button__save_label"]');
-        $I->waitForText('The block has been added successfully.');
-         */
-        $this->debug("I'm Adding A " . $blockType . " Block To The " . $area . " Area of the current page.");
+        $this->debug("I'm Adding A ".$blockType.' Block To The '.$area.' Area of the current page.');
         $this->clickWithLeftButton($this->getPathFromLocator('areaZone', ['Main' => $area]));
 
         $this->waitForElementVisible('//div[@class="popover fade bottom"]//a[@data-menu-action="area-add-block"]');
@@ -41,27 +15,21 @@ trait BlockTrait
         $this->waitForElement($this->getPathFromLocator('blockElement', ['content' => $blockType]));
         $this->scrollTo($this->getPathFromLocator('blockElement', ['content' => $blockType]));
         $this->clickWithLeftButton($this->getPathFromLocator('blockElement', ['content' => $blockType]));
-
-
     }
 
     public function saveChangesToBlock($blockType = null)
     {
-
         if ($blockType == 'content') {
             $this->debug('I click on save button in ckEditor');
             $this->clickWithLeftButton($this->getPathFromLocator('ckEditorSaveButton'));
-
         } else {
             $this->waitForElement($this->getPathFromLocator('uiDialogPrimaryButton'));
             $this->debug('I click on the primary button.');
             $this->clickWithLeftButton($this->getPathFromLocator('uiDialogPrimaryButton'));
-
         }
         $this->debug('I wait for the block to be added.');
 
         $this->waitForElement($this->getPathFromLocator('notificationSuccess'));
-
     }
 
     public function addContentBlock($content = 'Testing', $area = 'Main', $drag = false)
@@ -83,7 +51,6 @@ trait BlockTrait
             $this->debug("I'm adding the text into the content block");
             $this->type($text);
             $this->pressEnter();
-
         } else {
             $this->debug("I'm adding the text into the content block with bold");
             $this->clickWithLeftButton('//div[@contenteditable="true"][contains(@class,"cke_editable")]');
@@ -95,12 +62,13 @@ trait BlockTrait
             $this->clickWithLeftButton('//div[@class="cke_inner"]//span[@role="presentation"]//span[contains(@class,"cke_button__bold_icon")]');
         }
         $this->wait(0.5);
-
     }
 
     /**
      * @param $blockname
      * @param $areaname
+     * @param mixed $blockType
+     *
      * @throws \Exception
      */
     public function dragAndDropBlock($blockType, $areaname = 'Page Footer')
@@ -111,13 +79,13 @@ trait BlockTrait
         $this->waitForElement($this->getPathFromLocator('blockElement', ['content' => $blockType]));
         $this->scrollTo($this->getPathFromLocator('blockElement', ['content' => $blockType]));
         $this->wait(0.5);
-        $this->debug('I drag the "' . $blockType . '" type to the area named "' . $areaname . '"');
-        $this->dragAndDrop($this->getPathFromLocator('blockElement', ['content' => $blockType]),
-            $this->getPathFromLocator('areaZone', ['Main' => $areaname]));
+        $this->debug('I drag the "'.$blockType.'" type to the area named "'.$areaname.'"');
+        $this->dragAndDrop(
+            $this->getPathFromLocator('blockElement', ['content' => $blockType]),
+            $this->getPathFromLocator('areaZone', ['Main' => $areaname])
+        );
         $this->wait(1);
-
     }
-
 
     public function dragAndDropImageBlock($imageFilename, $areaname = 'Main', $hoverImage = null)
     {
@@ -128,15 +96,14 @@ trait BlockTrait
         $this->clickWithLeftButton($this->getPathFromLocator('fileSelectorButton'));
         $this->debug('I wait for the filemanager');
         $this->waitForElement('//div[contains(@class,"ccm-ui")][@data-header="file-manager"]');
-        $this->debug('I wait for the look for the image named "' . $imageFilename . '".');
+        $this->debug('I wait for the look for the image named "'.$imageFilename.'".');
         $this->searchAndSelectFile($imageFilename);
 
         if (!empty($hoverImage)) {
-            $this->waitForElement($this->getPathFromLocator('fileSelectorButtonWithText', ['Choose Image'=>'Choose Image On-State']), 30);
-            $this->clickWithLeftButton($this->getPathFromLocator('fileSelectorButtonWithText', ['Choose Image'=>'Choose Image On-State']));
+            $this->waitForElement($this->getPathFromLocator('fileSelectorButtonWithText', ['Choose Image' => 'Choose Image On-State']), 30);
+            $this->clickWithLeftButton($this->getPathFromLocator('fileSelectorButtonWithText', ['Choose Image' => 'Choose Image On-State']));
             $this->searchAndSelectFile($hoverImage);
         }
         $this->saveChangesToBlock();
     }
-
 }

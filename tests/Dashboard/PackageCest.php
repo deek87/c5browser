@@ -1,25 +1,24 @@
 <?php
 
-
-namespace Concrete\UITests\Page;
+namespace C5Browser\Test\Page;
 
 use AcceptanceTester;
 
-
-class PackageCest {
-
-
+class PackageCest
+{
     public function _before(AcceptanceTester $I)
     {
         $I->login();
     }
 
-    public function installPackage(AcceptanceTester $I) {
+    public function installPackage(AcceptanceTester $I)
+    {
         $I->installPackage('DK Test Package');
-        $I->checkPackageDetails('DK Test Package',['BlockTypes'=>1, 'SinglePages'=>1]);
+        $I->checkPackageDetails('DK Test Package', ['BlockTypes' => 1, 'SinglePages' => 1]);
     }
 
-    public function removePackage(AcceptanceTester $I) {
+    public function removePackage(AcceptanceTester $I)
+    {
         $I->uninstallPackage('DK Test Package', 30);
     }
 }

@@ -2,10 +2,9 @@
 
 namespace Concrete\Package\DkTestPackage;
 
-use Concrete\Core\Block\BlockType\BlockType;
 use Package;
 
-defined('C5_EXECUTE') or die("Access Denied.");
+defined('C5_EXECUTE') or die('Access Denied.');
 
 class Controller extends Package
 {
@@ -20,15 +19,18 @@ class Controller extends Package
 
     public function getPackageDescription()
     {
-        return t("Package for testing installs");
+        return t('Package for testing installs');
     }
 
     public function install()
     {
         $pkg = parent::install();
         \BlockType::installBlockType('dk_test', $pkg);
-        $this->install_pages($pkg, '/dashboard/dk_test',
-            ['cName' => t('DK TEST'), 'cDescription' => t('A Test Page')]);
+        $this->install_pages(
+            $pkg,
+            '/dashboard/dk_test',
+            ['cName' => t('DK TEST'), 'cDescription' => t('A Test Page')]
+        );
     }
 
     private function install_pages($pkg, $page, $info)
@@ -43,9 +45,6 @@ class Controller extends Package
             }
         } else {
             $p->update($info);
-
         }
-
     }
-
 }

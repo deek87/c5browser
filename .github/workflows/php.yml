@@ -1,4 +1,4 @@
-name: Test On Concrete 5
+name: Test On Concrete 5.8
 
 on:
   push:
@@ -82,3 +82,13 @@ jobs:
         docker exec c5_docker ls -la
         docker exec c5_docker ls -la packages
         docker exec c5_docker ccm-service start
+
+  php-lint:
+    runs-on: ubuntu-latest
+    name: Check PHP Coding Style
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: PHP Lint
+        run: composer phpcs:lint

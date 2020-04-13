@@ -1,12 +1,14 @@
 {
-    "name": "deek87/c5_browser",
+    "name": "deek87/c5browser",
     "description": "A concrete5 web browser module for codeception",
-    "version": "0.0.10",
     "type": "library",
     "require": {
         "php": ">=5.5.9",
         "codeception/codeception": "^4.1",
         "codeception/module-webdriver": "^1.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16"
     },
     "autoload": {
         "psr-4": {
@@ -23,5 +25,9 @@
             "email": "info@derekcameron.com"
         }
     ],
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "scripts": {
+        "phpcs:lint" : "vendor/bin/php-cs-fixer fix --dry-run",
+        "phpcs:fix" : "vendor/bin/php-cs-fixer fix"
+    }
 }
