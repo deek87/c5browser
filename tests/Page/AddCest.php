@@ -67,14 +67,15 @@ class AddCest
         $I->waitForText('Composer');
         $I->fillField('input[id="ptComposer[1][name]"][name="ptComposer[1][name]"]', 'My Auto Page');
         $I->fillField('textarea[id="ptComposer[2][description]"]', 'This is my description of this automatic page.');
-        $I->see('URL Slug');
-        $I->fillField('//input[contains(@id, "url_slug")]', 'test-page');
         // Override for viewing manually as bottom navbar gets in way sometimes
         $I->executeJS("var objDiv = document.getElementById('ccm-panel-detail-page-composer');
 objDiv.scrollTop = objDiv.scrollHeight;");
         $I->clickWithLeftButton('//div[@class="ccm-item-selector"]//a[@data-page-selector-link="choose"]');
         $I->waitForText('Full Sitemap', 20);
         $I->clickWithLeftButton(['xpath' => '//span[contains(@class,"fancytree-node")]/span[contains(text(), "Home")]']);
+        $I->waitForText('URL Slug');
+        $I->fillField('//input[contains(@id, "url_slug")]', 'test-page');
+        $I->wait(1);
     }
 
     public function publishAndVist(AcceptanceTester $I)
