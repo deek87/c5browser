@@ -74,7 +74,7 @@ class AddCest
 objDiv.scrollTop = objDiv.scrollHeight;");
         $I->clickWithLeftButton('//div[@class="ccm-item-selector"]//a[@data-page-selector-link="choose"]');
         $I->waitForText('Full Sitemap', 20);
-        $I->clickWithLeftButton(['xpath'=>'//span[contains(@class,"fancytree-node")]/span[contains(text(), "Home")]']);
+        $I->clickWithLeftButton(['xpath' => '//span[contains(@class,"fancytree-node")]/span[contains(text(), "Home")]']);
     }
 
     public function publishAndVist(AcceptanceTester $I)
