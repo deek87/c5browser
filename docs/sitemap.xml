@@ -2,27 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
  <url>
   <loc>https://deek87.github.io/c5browser</loc>
-  <lastmod>2020-04-16T01:12:12+00:00</lastmod>
+  <lastmod>2020-04-16T01:28:51+00:00</lastmod>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://deek87.github.io/c5browser/404.html</loc>
+  <lastmod>2020-04-16T01:28:51+00:00</lastmod>
   <changefreq>daily</changefreq>
  </url>
  <url>
   <loc>https://deek87.github.io/c5browser/docs/example</loc>
-  <lastmod>2020-04-16T01:12:12+00:00</lastmod>
+  <lastmod>2020-04-16T01:28:51+00:00</lastmod>
   <changefreq>daily</changefreq>
  </url>
  <url>
   <loc>https://deek87.github.io/c5browser/docs/getting-started</loc>
-  <lastmod>2020-04-16T01:12:12+00:00</lastmod>
+  <lastmod>2020-04-16T01:28:51+00:00</lastmod>
   <changefreq>daily</changefreq>
  </url>
  <url>
   <loc>https://deek87.github.io/c5browser/docs/configuration</loc>
-  <lastmod>2020-04-16T01:12:12+00:00</lastmod>
+  <lastmod>2020-04-16T01:28:51+00:00</lastmod>
   <changefreq>daily</changefreq>
  </url>
  <url>
   <loc>https://deek87.github.io/c5browser/docs/todo-list</loc>
-  <lastmod>2020-04-16T01:12:12+00:00</lastmod>
+  <lastmod>2020-04-16T01:28:51+00:00</lastmod>
   <changefreq>daily</changefreq>
  </url>
 </urlset>
