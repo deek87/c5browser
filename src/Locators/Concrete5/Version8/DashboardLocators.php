@@ -18,6 +18,7 @@ class DashboardLocators extends BaseDashboardLocators
     protected $dashboardFormLink = ['xpath' => "//div[@class='ccm-dashboard-form-actions-wrapper']/div[@class='ccm-dashboard-form-actions']/a[contains(text(),'button_text')]"];
     protected $dashboardFormButton = ['xpath' => "//div[@class='ccm-dashboard-form-actions-wrapper']/div[@class='ccm-dashboard-form-actions']/input[@value='button_text']"];
     protected $dashboardPrivacyDialog = ['xpath' => '//button[@data-action="agree-privacy-policy"]'];
+    protected $dashboardSubmitButton = ['xpath' => "//div[@class='ccm-dashboard-form-actions-wrapper']/div[@class='ccm-dashboard-form-actions']/button[@type='submit']"];
 
     /**
      * {@inheritdoc}
