@@ -12,7 +12,6 @@ class InstallLocators extends BaseInstallLocators
     protected $continueInstallationButton = ['xpath' => "//form[@id='continue-to-installation']/a[contains(@class,'btn-primary')]"];
     protected $installButton = ['xpath' => "//div[@class='ccm-install-actions'/button"];
     protected $installRedirect = 'index.php/install';
-    protected $siteName = ['id' => 'SITE'];
     protected $startingPointEmpty = ['id' => 'SAMPLE_CONTENT1'];
     protected $startingPointFull = ['id' => 'SAMPLE_CONTENT2'];
     protected $databaseServerField = ['id' => 'DB_SERVER'];

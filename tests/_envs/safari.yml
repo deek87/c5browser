@@ -1,0 +1,11 @@
+# `safari` environment config goes here
+modules:
+  config:
+    Concrete5Browser:
+      browser: safari
+      port: 4445
+      path: ''
+      capabilities:
+        safari.options:
+          technologyPreview: true
+          screenResolution: "1920x1080"
