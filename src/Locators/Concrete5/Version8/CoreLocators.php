@@ -16,9 +16,9 @@ class CoreLocators extends BaseCoreLocators
     protected $toolbar = ['id' => 'ccm-toolbar'];
     protected $toolbarAddBlock = ['xpath' => '//div[@id="ccm-toolbar"]/ul/li[@data-guide-toolbar-action="add-content"]/a[@data-launch-panel="add-block"]'];
     protected $toolbarPageSettings = ['xpath' => '//div[@id="ccm-toolbar"]/ul/li[@data-guide-toolbar-action="page-settings"]/a[@data-launch-panel="page"]'];
-    protected $toolbarLargeTitles = ['xpath'=>'//div[@id="ccm-toolbar"][contains(@class,"large-font")]'];
-    protected $toolbarReturn = ['xpath'=>'//div[@id="ccm-toolbar"]//a[@data-original-title][child::span[@class="ccm-toolbar-accessibility-title ccm-toolbar-accessibility-title-return"]]'];
-    protected $toolbarReturnTitle = ['xpath'=>'//div[@id="ccm-toolbar"]//a[@data-original-title]/span[@class="ccm-toolbar-accessibility-title ccm-toolbar-accessibility-title-return"]'];
+    protected $toolbarLargeTitles = ['xpath' => '//div[@id="ccm-toolbar"][contains(@class,"large-font")]'];
+    protected $toolbarReturn = ['xpath' => '//div[@id="ccm-toolbar"]//a[@data-original-title][child::span[@class="ccm-toolbar-accessibility-title ccm-toolbar-accessibility-title-return"]]'];
+    protected $toolbarReturnTitle = ['xpath' => '//div[@id="ccm-toolbar"]//a[@data-original-title]/span[@class="ccm-toolbar-accessibility-title ccm-toolbar-accessibility-title-return"]'];
     protected $toolbarEdit = ['xpath' => '//div[@id="ccm-toolbar"]/ul/li[@data-guide-toolbar-action="check-in"]/a[@data-toolbar-action="check-in"]'];
     protected $launchPanel = ['xpath' => '//a[@data-launch-panel="panel"]'];
     protected $primaryButton = ['xpath' => "//button[contains(@class, 'btn-primary')]"];

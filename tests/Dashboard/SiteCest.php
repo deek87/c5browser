@@ -1,6 +1,5 @@
 <?php
 
-
 namespace C5Browser\Test\Page;
 
 use AcceptanceTester;
@@ -22,5 +21,4 @@ class SiteCest
         $I->wait(2);
         $I->canSeeInTitle('Testing Site');
     }
-
 }
