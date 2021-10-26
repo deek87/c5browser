@@ -8,7 +8,7 @@ modules:
       capabilities:
         "moz:firefoxOptions":
           args:
-            - "-headless"
+            #  - "-headless"
             - "-disable-gpu"
             - "-width=1920"
             - "-height=1080"
